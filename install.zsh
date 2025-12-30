@@ -50,11 +50,11 @@ zparseopts -D -E -A opts -- \
     -spotify \
     -vscode: \
     -discord \
-    -zen \
+    -yt-music \
     -aur-helper:
 
 if [[ -n "${opts[(i)-h]}" || -n "${opts[(i)--help]}" ]]; then
-    echo "usage: ./install.zsh [-h] [--noconfirm] [--spotify] [--vscode=code|codium] [--discord] [--zen] [--aur-helper=yay|paru]"
+    echo "usage: ./install.zsh [-h] [--noconfirm] [--spotify] [--vscode=code|codium] [--discord] [--yt-music] [--aur-helper=yay|paru]"
     exit 0
 fi
 
@@ -223,6 +223,12 @@ if [[ -n "${opts[(i)--spotify]}" ]]; then
         spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace
         spicetify apply
     fi
+fi
+
+# Youtube Music Desktop App
+if [[ -n "${opts[(i)--yt-music]}" ]]; then
+    log "Installing Youtube Music Desktop App..."
+    $AUR_HELPER -S --needed pear-desktop --noconfirm
 fi
 
 # Discord
