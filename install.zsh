@@ -183,12 +183,6 @@ if confirm_overwrite "$CONFIG_DIR/hypr"; then
     ln -s "$(realpath hypr)" "$CONFIG_DIR/hypr"
 fi
 
-# Starship
-if confirm_overwrite "$CONFIG_DIR/starship.toml"; then
-    log "Linking starship config..."
-    ln -s "$(realpath starship.toml)" "$CONFIG_DIR/starship.toml"
-fi
-
 # Fastfetch
 if confirm_overwrite "$CONFIG_DIR/fastfetch"; then
     log "Linking fastfetch config..."
