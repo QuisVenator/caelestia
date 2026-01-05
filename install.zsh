@@ -207,6 +207,12 @@ if confirm_overwrite "$CONFIG_DIR/btop"; then
     ln -s "$(realpath btop)" "$CONFIG_DIR/btop"
 fi
 
+# zsh
+if confirm_overwrite "~/.zshrc"; then
+    log "Linking zsh config..."
+    ln -s "$(realpath zsh/.zshrc)" "~/.zshrc"
+fi
+
 # NOTE: Skipped foot and fish configs (as user uses Kitty/Zsh)
 
 # 6. Optional Apps
