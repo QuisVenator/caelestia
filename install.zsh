@@ -204,7 +204,7 @@ fi
 # zsh
 if confirm_overwrite "~/.zshrc"; then
     log "Linking zsh config..."
-    ln -s "$(realpath zsh/.zshrc)" "~/.zshrc"
+    ln -s "$(realpath zsh/.zshrc)" "$HOME/.zshrc"
 fi
 
 # NOTE: Skipped foot and fish configs (as user uses Kitty/Zsh)
