@@ -87,6 +87,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Caelestia Dynamic Theme TODO: Change cli to actually set kitty theme
+if [ -f "$HOME/.local/state/caelestia/sequences.txt" ]; then
+    cat "$HOME/.local/state/caelestia/sequences.txt"
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -116,6 +121,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+eval $(thefuck --alias)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval $(thefuck --alias)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
+bindkey '^H' backward-kill-word
