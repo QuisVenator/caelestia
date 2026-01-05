@@ -1,6 +1,12 @@
 if [[ -o interactive ]]; then
     fastfetch --key-padding-left 5
 fi
+
+# Caelestia Dynamic Theme TODO: Change cli to actually set kitty theme
+if [ -f "$HOME/.local/state/caelestia/sequences.txt" ]; then
+    cat "$HOME/.local/state/caelestia/sequences.txt"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -86,11 +92,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# Caelestia Dynamic Theme TODO: Change cli to actually set kitty theme
-if [ -f "$HOME/.local/state/caelestia/sequences.txt" ]; then
-    cat "$HOME/.local/state/caelestia/sequences.txt"
-fi
 
 # User configuration
 
