@@ -54,7 +54,7 @@ zparseopts -D -E -A opts -- \
     -aur-helper:
 
 if [[ -n "${opts[(i)-h]}" || -n "${opts[(i)--help]}" ]]; then
-    echo "usage: ./install.zsh [-h] [--noconfirm] [--spotify] [--vscode=code|codium] [--discord] [--yt-music] [--aur-helper=yay|paru]"
+    echo "usage: ./install.zsh [-h] [--noconfirm] [--spotify] [--vscode=code|codium] [--discord] [--yt-music] [--zen] [--aur-helper=yay|paru]"
     exit 0
 fi
 
@@ -237,6 +237,44 @@ if [[ -n "${opts[(i)--discord]}" ]]; then
     $AUR_HELPER -S --needed discord equicord-installer-bin --noconfirm
     sudo Equilotl -install -location /opt/discord
     sudo Equilotl -install-openasar -location /opt/discord
+fi
+
+if [[ -n "${opts[(i)--zen]}" ]]; then
+    log 'Installing zen...'
+    $AUR_HELPER -S --needed zen-browser-bin --noconfirm
+
+    # Install userChrome css
+    local chrome_dirs=($HOME/.zen/*/chrome(N))
+    local chrome=$chrome_dirs[1]
+
+    if [[ -n "$chrome" ]]; then
+        if confirm_overwrite "$chrome/userChrome.css"; then
+            log 'Installing zen userChrome...'
+            ln -sf "$(realpath zen/userChrome.css)" "$chrome/userChrome.css"
+        fi
+    else
+        log "Warning: Could not find Zen browser chrome directory."
+    fi
+
+    # Install native app
+    local hosts="$HOME/.mozilla/native-messaging-hosts"
+    local lib="$HOME/.local/lib/caelestia"
+
+    if confirm_overwrite "$hosts/caelestiafox.json"; then
+        log 'Installing zen native app manifest...'
+        mkdir -p "$hosts"
+        cp zen/native_app/manifest.json "$hosts/caelestiafox.json"
+        sed -i "s|{{ \$lib }}|$lib|g" "$hosts/caelestiafox.json"
+    fi
+
+    if confirm_overwrite "$lib/caelestiafox"; then
+        log 'Installing zen native app...'
+        mkdir -p "$lib"
+        ln -sf "$(realpath zen/native_app/app.zsh)" "$lib/caelestiafox"
+    fi
+
+    # Prompt user to install extension
+    log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
 fi
 
 # 7. Final Setup
