@@ -130,3 +130,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 
 bindkey '^H' backward-kill-word
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
