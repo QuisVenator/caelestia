@@ -133,3 +133,6 @@ bindkey '^H' backward-kill-word
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+# Added by Hugging Face CLI installer
+export PATH="/home/pauls/.local/bin:$PATH"
