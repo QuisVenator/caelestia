@@ -18,7 +18,7 @@ DEPENDENCIES=(
     # Theming & Visuals
     "eza" "fastfetch" "btop" "jq"
     "adw-gtk-theme" "papirus-icon-theme" "ttf-jetbrains-mono-nerd"
-    "ttf-cascadia-code-nerd"
+    "ttf-cascadia-code-nerd" "thefuck" "pyenv"
 
     # Audio/Video/Hardware Control
     "wireplumber" "libpipewire" "aubio"
@@ -248,7 +248,7 @@ fi
 # Oh My Zsh
 if confirm_overwrite "$HOME/.oh-my-zsh"; then
     log "Installing Oh My Zsh..."
-    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Powerlevel10k theme
