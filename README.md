@@ -35,7 +35,7 @@ options:
 For example:
 
 ```sh
-git clone https://github.com/QuisVenator/caelestia-shell.git ~/.local/share/caelestia
+git clone https://github.com/QuisVenator/caelestia.git ~/.local/share/caelestia
 ~/.local/share/caelestia/install.zsh --vscode=code --yt-music --zen --discord
 ```
 
