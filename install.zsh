@@ -7,7 +7,7 @@ autoload -U colors && colors
 # ---------------------------------------------------------
 # CONFIGURATION
 # ---------------------------------------------------------
-MY_SHELL_FORK="git@github.com:QuisVenator/caelestia-shell.git" 
+MY_SHELL_FORK="https://github.com/QuisVenator/caelestia-shell.git" 
 
 # 1. Official Repo Dependencies (Pacman)
 DEPENDENCIES=(
