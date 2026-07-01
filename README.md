@@ -1,19 +1,33 @@
 # caelestia
 
-This is the main repo of the caelestia dots and contains the user configs for
-apps. This repo also includes an install script to install the entire dots.
+This is the main repo of the caelestia dots and contains user configs for
+various apps.
 
-## Installation
+> [!IMPORTANT]
+> The legacy `install.fish` script in this repo has been deprecated in favour
+> of the [CLI](https://github.com/caelestia-dots/cli)'s install command.
+>
+> If you have an existing installation with the legacy script, please update
+> the CLI and run the install command to migrate.
 
 Clone this repo and run the install script (you need
 [`zsh`](https://www.zsh.org/) installed).
 
-> [!WARNING]
-> The install script symlinks all configs into place, so you CANNOT
-> move/remove the repo folder once you run the install script. If
-> you do, most apps will not behave properly and some (e.g. Hyprland)
-> will fail to start completely. I recommend cloning the repo to
-> `~/.local/share/caelestia`.
+> [!IMPORTANT]
+> We have switched to using Lua for the Hyprland config!
+> For everyone with a custom `~/.config/caelestia/hypr-user.conf`
+> or `~/.config/caelestia/hypr-vars.conf`, please convert it to Lua
+> either manually, or using one of the available converters online.
+>
+> Usage for `hypr-vars.lua`:
+>
+> ```lua
+> return {
+>   browser = "chromium",
+> }
+> ```
+
+## Installation (Arch Linux)
 
 The install script has some options for installing configs for some apps.
 
@@ -41,7 +55,8 @@ git clone https://github.com/QuisVenator/caelestia.git ~/.local/share/caelestia
 
 ### Manual installation
 
-Dependencies:
+Clone this repo, then go through [the manifest](/manifest.toml) and install all packages from the
+components that you want to enable, then copy all the entries from those components.
 
 -   hyprland
 -   xdg-desktop-portal-hyprland
@@ -97,49 +112,16 @@ Follow the Spicetify [installation instructions](https://spicetify.app/docs/adva
 copy or symlink the `spicetify` folder to `$XDG_CONFIG_HOME/spicetify` and run:
 
 ```sh
-spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace
-spicetify apply
+git clone https://github.com/caelestia-dots/caelestia.git
+cd caelestia
+sudo pacman -S --needed hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ttf-jetbrains-mono-nerd
+mkdir -p $XDG_CONFIG_HOME/hypr
+cp -r hypr/. $XDG_CONFIG_HOME/hypr/
 ```
-
-#### Installing VSCode/VSCodium configs:
-
-Install VSCode or VSCodium, then copy or symlink `vscode/settings.json` and
-`vscode/keybindings.json` into the `$XDG_CONFIG_HOME/Code/User` (or `$XDG_CONFIG_HOME/VSCodium/User`
-if using VSCodium) folder. Then copy or symlink `vscode/flags.conf` to `$XDG_CONFIG_HOME/code-flags.conf`
-(or `$XDG_CONFIG_HOME/codium-flags.conf` if using VSCodium).
-
-Finally, install the extension VSIX from `vscode/caelestia-vscode-integration`:
-
-```sh
-# Use `codium` if using VSCodium
-code --install-extension vscode/caelestia-vscode-integration/caelestia-vscode-integration-*.vsix
-```
-
-#### Installing Zen Browser configs:
-
-Install Zen Browser, then copy or symlink `zen/userChrome.css` to the `chrome` folder in your
-profile of choice in `~/.zen`. e.g. `zen/userChrome.css -> ~/.zen/<profile>/chrome/userChrome.css`.
-
-Now install the native app by copying `zen/native_app/manifest.json` to
-`~/.mozilla/native-messaging-hosts/caelestiafox.json` and replacing the `{{ $lib }}` string in it
-with the absolute path of `~/.local/lib/caelestia` (this must be the absolute path, e.g.
-`/home/user/.local/lib/caelestia`). Then copy or symlink `zen/native_app/app.zsh` to
-`~/.local/lib/caelestia/caelestiafox`.
-
-Finally, install the CaelestiaFox extension from [here](https://addons.mozilla.org/en-US/firefox/addon/caelestiafox).
 
 ## Updating
 
-Run your AUR helper to update AUR packages, then `cd` into the repo directory and run `git pull`
-to update the configs. To sync with upstream caelestia changes, fetch and rebase:
-
-```sh
-git fetch upstream
-git checkout main
-git merge upstream/main --ff-only
-git checkout personal
-git rebase main
-```
+Use `caelestia update` to perform a full system update and update the dots.
 
 ## Usage
 

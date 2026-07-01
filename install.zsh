@@ -241,7 +241,6 @@ fi
 if confirm_overwrite "$CONFIG_DIR/hypr"; then
     log "Linking hypr configs..."
     ln -s "$(realpath hypr)" "$CONFIG_DIR/hypr"
-    chmod u+x "$CONFIG_DIR/hypr/scripts/wsaction.zsh" 2>/dev/null || true
     hyprctl reload
 fi
 
