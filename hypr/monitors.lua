@@ -13,11 +13,23 @@ hl.monitor({ output = vars.rightMon, mode = "1920x1080@60",     position = "4480
 
 -- Workspaces
 for i = 1, 10 do
-    hl.workspace_rule({ workspace = i, monitor = vars.mainMon })
+    hl.workspace_rule({ 
+        workspace = tostring(i), 
+        monitor = vars.mainMon,
+        default = i == 1,  -- workspace 1 is the default for mainMon
+    })
 end
 for i = 11, 20 do
-    hl.workspace_rule({ workspace = i, monitor = vars.rightMon })
+    hl.workspace_rule({ 
+        workspace = tostring(i), 
+        monitor = vars.rightMon,
+        default = i == 11,
+    })
 end
 for i = 21, 30 do
-    hl.workspace_rule({ workspace = i, monitor = vars.leftMon })
+    hl.workspace_rule({ 
+        workspace = tostring(i), 
+        monitor = vars.leftMon,
+        default = i == 21,
+    })
 end
